@@ -1,6 +1,6 @@
 # todo - Markdown Todo interface
 
-`todo` A REST api that will scan in a directory for Markdown todo items and serve them up with a cli and eventually full CRUD REST interface
+`todo` A cli tool and REST api that will scan in a directory for Markdown todo items and serve them up to read and manipulate them and eventually full CRUD REST interface
 
 ## TODO
 
@@ -28,3 +28,7 @@
 ## Decision Records
 
 - Following the [project layout](https://github.com/golang-standards/project-layout) go standard
+
+## Licence
+
+[MIT](LICENCE)
