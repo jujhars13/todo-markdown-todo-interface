@@ -1,4 +1,4 @@
-uses https://github.com/ngs/go-release.action
+# uses https://github.com/ngs/go-release.action
 on: release
 name: Build Release
 jobs:
