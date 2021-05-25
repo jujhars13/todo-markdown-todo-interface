@@ -1,4 +1,4 @@
-package scanfile
+package main
 
 import (
 	"fmt"

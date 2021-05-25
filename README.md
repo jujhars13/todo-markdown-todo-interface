@@ -7,7 +7,7 @@
 ### Core
 
 - [x] setup project
-- [ ] read active todos and spit them out to cli
+- [x] read active todos and spit them out to cli
 - [ ] setup makefile
 - [ ] setup github actions for ci unit tests
 - [ ] create sample test file generator
