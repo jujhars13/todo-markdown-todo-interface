@@ -1,6 +1,8 @@
 # todo - Markdown Todo interface
 
-`todo` A cli tool and REST api that will scan in a directory for Markdown todo items and serve them up to read and manipulate them and eventually full CRUD REST interface
+`todo` is a cli tool and REST api that will scan in a directory for Markdown files that contain Markdown format TODO items and serve them up to read and manipulate them via cli and eventually a full CRUD REST interface.
+
+![test workflow](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
 
 ## TODO
 
