@@ -11,10 +11,9 @@
 - [x] setup project
 - [x] read active todos and spit them out to cli
 - [ ] setup makefile
-- [ ] setup github actions for ci unit tests
-- [ ] create sample test file generator
-- [ ] publish test badges in readme
-- [ ] mark a todo as done
+- [x] setup github actions for ci unit tests
+- [x] publish test badges in readme
+- [ ] mark a todo as done via cli
 - [ ] Create build and release pipeline
 - [ ] Create docker container
 
