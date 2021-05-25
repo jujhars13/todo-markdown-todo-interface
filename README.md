@@ -13,6 +13,7 @@
 - [ ] setup makefile
 - [x] setup github actions for ci unit tests
 - [x] publish test badges in readme
+- [ ] setup cli parsing
 - [ ] mark a todo as done via cli
 - [ ] Create build and release pipeline
 - [ ] Create docker container

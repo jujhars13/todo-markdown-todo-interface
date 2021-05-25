@@ -10,35 +10,21 @@ import (
 	"jujhar.com/pkg/scanstring"
 )
 
-// func main() {
-
-// 	//sourceDir := "/home/jujhar/proj/o/todo-markdown-todo-interface/test/testData"
-
-// 	//TODO check if dir exists and check if markdown files in dir
-// 	//TODO for each markdown file scan for readme items and return the line numbers for any finds
-// 	//TODO
-// 	testString := `- [ ] todo item 11
-//   - [x] todo item 12 done
-//   - [x] todo item 13
-//   - [x] todo item 14 done
-//   - [ ] todo item 15
-//   - [ ] todo item 16 done
-//   `
-// 	lines := ScanFileForReadmeItems(testString)
-// 	if len(lines) == 0 {
-// 		log.Println("no todo items in this file")
-// 	} else {
-// 		log.Printf("Found the following lines %v", lines)
-// 	}
-
-// }
-
+// TODO setup cli parsing to get directory options
+// TODO Refactor to make less ugly
 func main() {
 
-	var files []string
-	numOfFiles := 0
-	sourceDir := "/home/jujhar/proj/o/todo-markdown-todo-interface/test/testData/"
+	type LineResultsType = struct {
+		lineNumber int
+		lineString string
+	}
+	type FileResultsType = struct {
+		fileName string
+		data     []LineResultsType
+	}
 
+	sourceDir := "/home/jujhar/Dropbox/notes/notes"
+	var files []string
 	err := filepath.Walk(sourceDir, func(path string, info os.FileInfo, err error) error {
 		files = append(files, path)
 		return nil
@@ -47,22 +33,25 @@ func main() {
 		log.Panic(err)
 	}
 
+	var overallOutput []FileResultsType
+
+	// look over each files, find markdown ones and scan them saving the results
+	// TODO refactor so we're not indented in so far
 	for _, file := range files {
 		if filepath.Ext((file)) == ".md" {
-			numOfFiles++
 			lines := scanFiles(file)
 			if len(lines) > 0 {
-				log.Printf("We have the following lines %v in file %v", lines, file)
+				var results []LineResultsType
 				for _, line := range lines {
-					lineNumber, output, _ := getStringAtLineInFile(file, line)
-					log.Printf("%v: %v", lineNumber, output)
+					lineNumber, retString, _ := getStringAtSpecificLineInFile(file, line)
+					results = append(results, LineResultsType{lineNumber: lineNumber, lineString: retString})
 				}
+				fileResults := FileResultsType{fileName: file, data: results}
+				overallOutput = append(overallOutput, fileResults)
 			}
-
 		}
 	}
-
-	log.Printf("Found %v markdown files to scan", numOfFiles)
+	log.Printf("We have an Overall Output of %v\n", overallOutput)
 }
 
 func scanFiles(fileName string) []int {
@@ -74,7 +63,7 @@ func scanFiles(fileName string) []int {
 	return scanstring.ScanStringForReadmeItems(string(data))
 }
 
-func getStringAtLineInFile(filename string, lineNumber int) (lineNmbr int, todoString string, err error) {
+func getStringAtSpecificLineInFile(filename string, lineNumber int) (lineNmbr int, todoString string, err error) {
 	file, err := os.Open(filename)
 	lastLine := 0
 	if err != nil {
