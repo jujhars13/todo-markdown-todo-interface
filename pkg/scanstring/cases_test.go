@@ -49,5 +49,5 @@ random string two
 random string two
 - [x] todo item 3
 - [ ] todo item 3
-`, []int{1, 6}},
+`, []int{1, 7}},
 }
