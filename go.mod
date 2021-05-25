@@ -1,3 +1,3 @@
-module jujhar.com/m/v2
+module jujhar.com
 
 go 1.16

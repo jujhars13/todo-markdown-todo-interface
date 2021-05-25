@@ -1,4 +1,5 @@
-package scanString
+// Pacakge which contains funcs to scan strings
+package scanstring
 
 import (
 	"regexp"
@@ -10,9 +11,10 @@ import (
 func ScanStringForReadmeItems(input string) []int {
 
 	output := []int{}
-	// NB not zero index as file lines start from 1 not 0
+	// NB not zero index as file line numbers start from 1
 	line := 1
 	temp := strings.Split(input, "\n")
+
 	for _, item := range temp {
 		findRegex := regexp.MustCompile(`\- \[ \]`)
 		matches := findRegex.FindAllStringSubmatchIndex(item, -1)

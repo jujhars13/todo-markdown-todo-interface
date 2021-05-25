@@ -1,8 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"regexp"
+	"bufio"
+	"io/ioutil"
+	"log"
+	"os"
+	"path/filepath"
+
+	"jujhar.com/pkg/scanstring"
 )
 
 // func main() {
@@ -28,18 +33,62 @@ import (
 
 // }
 
-// ScanFileForReadmeItems returns any lines that have an open todo item in
-// or returns 0 if none found
-func ScanFileForReadmeItems(input string) []int {
+func main() {
 
-	findRegex := regexp.MustCompile(`\- \[ \]`)
-	matches := findRegex.FindAllStringSubmatchIndex(input, -1)
-	if len(matches) == 0 {
-		return make([]int, 0)
+	var files []string
+	numOfFiles := 0
+	sourceDir := "/home/jujhar/proj/o/todo-markdown-todo-interface/test/testData/"
+
+	err := filepath.Walk(sourceDir, func(path string, info os.FileInfo, err error) error {
+		files = append(files, path)
+		return nil
+	})
+	if err != nil {
+		log.Panic(err)
 	}
 
-	fmt.Printf("%v", matches)
+	for _, file := range files {
+		if filepath.Ext((file)) == ".md" {
+			numOfFiles++
+			lines := scanFiles(file)
+			if len(lines) > 0 {
+				log.Printf("We have the following lines %v in file %v", lines, file)
+				for _, line := range lines {
+					lineNumber, output, _ := getStringAtLineInFile(file, line)
+					log.Printf("%v: %v", lineNumber, output)
+				}
+			}
 
-	// return make([]int, 12)
-	return matches[0]
+		}
+	}
+
+	log.Printf("Found %v markdown files to scan", numOfFiles)
+}
+
+func scanFiles(fileName string) []int {
+
+	data, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		log.Fatalf("File reading error %v\n", err)
+	}
+	return scanstring.ScanStringForReadmeItems(string(data))
+}
+
+func getStringAtLineInFile(filename string, lineNumber int) (lineNmbr int, todoString string, err error) {
+	file, err := os.Open(filename)
+	lastLine := 0
+	if err != nil {
+		log.Fatalf("File reading error %v\n", err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lastLine++
+		if lastLine == lineNumber {
+			// you can return sc.Bytes() if you need output in []bytes
+			return lineNumber, scanner.Text(), scanner.Err()
+		}
+	}
+	return lineNumber, "", nil
+
 }

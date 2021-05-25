@@ -30,6 +30,8 @@
 ## Decision Records
 
 - Following the [project layout](https://github.com/golang-standards/project-layout) go standard
+- Focus on CLI functionality first, then work on REST interface+
+
 
 ## Licence
 
