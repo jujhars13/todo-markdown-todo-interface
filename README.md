@@ -6,11 +6,11 @@
 
 ### Core
 
-- [ ] setup project
-- [ ] create sample test file generator
+- [x] setup project
 - [ ] read active todos and spit them out to cli
 - [ ] setup makefile
 - [ ] setup github actions for ci unit tests
+- [ ] create sample test file generator
 - [ ] publish test badges in readme
 - [ ] mark a todo as done
 - [ ] Create build and release pipeline
