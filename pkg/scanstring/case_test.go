@@ -1,10 +1,5 @@
 package scanstring
 
-import (
-	"reflect"
-	"testing"
-)
-
 // various test cases of markdown permutations
 // can be a bit tricky to read because of multiline strings
 var scanStringForReadmeItemsTestCases = []struct {
@@ -59,15 +54,4 @@ random string two
 - [x] todo item 3
 - [ ] todo item 3
 `, []int{1, 7}},
-}
-
-func TestScanStringForReadmeItems(t *testing.T) {
-
-	// see cases_test.go for test cases struct
-	for _, tc := range scanStringForReadmeItemsTestCases {
-		observed := ScanStringForReadmeItems(tc.testMarkdownString)
-		if !reflect.DeepEqual(tc.expected, observed) {
-			t.Fatalf("ScanFileForReadmeItems= %v, wanted %v in testString \n %v", observed, tc.expected, tc.testMarkdownString)
-		}
-	}
 }

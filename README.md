@@ -4,6 +4,14 @@
 
 ![test workflow](https://github.com/jujhars13/todo-markdown-todo-interface/actions/workflows/test.yml/badge.svg)
 
+## Usage
+
+```bash
+# will scan this directory for Markdown files
+# if it finds todo's it will print them out
+todo -d ~/Dropbox/notes
+```
+
 ## TODO
 
 ### Core
