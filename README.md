@@ -37,7 +37,7 @@ todo -d ~/Dropbox/notes
 
 ## Decision Records
 
-- Following the [project layout](https://github.com/golang-standards/project-layout) go standard
+- Following the [project layout](https://github.com/golang-standards/project-layout) Go project layout standard
 - Focus on CLI functionality first, then work on REST interface+
 
 
