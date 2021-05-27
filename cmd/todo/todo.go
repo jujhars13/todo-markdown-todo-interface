@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"jujhar.com/pkg/scanstring"
+	"jujhar.com/pkg/scan"
 )
 
 type LineResultsType = struct {
@@ -25,26 +25,21 @@ type FileResultsType = struct {
 // Todo is the main entrypoint
 func Todo(sourceDir string) {
 
-	var files []string
+	var mdFiles []string
 	err := filepath.Walk(sourceDir, func(path string, info os.FileInfo, err error) error {
-		files = append(files, path)
+		if filepath.Ext((path)) == ".md" {
+			mdFiles = append(mdFiles, path)
+		}
 		return nil
 	})
 	if err != nil {
 		log.Panic(err)
 	}
-
-	var overallOutput []FileResultsType
-
-	var mdFiles []string
-	for _, file := range files {
-		if filepath.Ext((file)) == ".md" {
-			mdFiles = append(mdFiles, file)
-		}
-	}
 	if len(mdFiles) == 0 {
 		log.Fatal("No Markdown files found in target dir")
 	}
+
+	var overallOutput []FileResultsType
 
 	// look over each files, find markdown ones and scan them saving the results
 	// TODO refactor so we're not indented in so far
@@ -69,7 +64,7 @@ func scanFileContent(fileName string) []int {
 	if err != nil {
 		log.Fatalf("File reading error %v\n", err)
 	}
-	return scanstring.ScanStringForReadmeItems(string(data))
+	return scan.ScanStringForReadmeItems(string(data))
 }
 
 func getStringAtSpecificLineInFile(filename string, lineNumber int) (lineNmbr int, todoString string, err error) {

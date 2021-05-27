@@ -1,4 +1,4 @@
-package scanstring
+package scan
 
 import (
 	"reflect"
@@ -14,4 +14,9 @@ func TestScanStringForReadmeItems(t *testing.T) {
 			t.Fatalf("ScanFileForReadmeItems= %v, wanted %v in testString \n %v", observed, tc.expected, tc.testMarkdownString)
 		}
 	}
+}
+
+// see https://stackoverflow.com/a/67012273/341156
+func TestGetStringAtSpecificLineInFile(t *testing.T) {
+
 }

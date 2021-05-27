@@ -1,4 +1,4 @@
-package scanstring
+package scan
 
 // various test cases of markdown permutations
 // can be a bit tricky to read because of multiline strings
