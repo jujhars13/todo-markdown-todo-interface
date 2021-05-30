@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"io/ioutil"
 	"log"
 	"os"
@@ -10,13 +9,9 @@ import (
 	"jujhar.com/pkg/scan"
 )
 
-type LineResultsType = struct {
-	lineNumber int
-	lineString string
-}
 type FileResultsType = struct {
 	fileName string
-	data     []LineResultsType
+	data     []scan.LineResultsType
 }
 
 // TODO Refactor to make less ugly
@@ -46,10 +41,10 @@ func Todo(sourceDir string) {
 	for _, file := range mdFiles {
 		lines := scanFileContent(file)
 		if len(lines) > 0 {
-			var results []LineResultsType
+			var results []scan.LineResultsType
 			for _, line := range lines {
-				lineNumber, retString, _ := getStringAtSpecificLineInFile(file, line)
-				results = append(results, LineResultsType{lineNumber: lineNumber, lineString: retString})
+				tmp, _ := scan.GetStringAtSpecificLineInFile(file, line)
+				results = append(results, tmp)
 			}
 			fileResults := FileResultsType{fileName: file, data: results}
 			overallOutput = append(overallOutput, fileResults)
@@ -65,23 +60,4 @@ func scanFileContent(fileName string) []int {
 		log.Fatalf("File reading error %v\n", err)
 	}
 	return scan.ScanStringForReadmeItems(string(data))
-}
-
-func getStringAtSpecificLineInFile(filename string, lineNumber int) (lineNmbr int, todoString string, err error) {
-	file, err := os.Open(filename)
-	lastLine := 0
-	if err != nil {
-		log.Fatalf("File reading error %v\n", err)
-	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lastLine++
-		if lastLine == lineNumber {
-			// you can return sc.Bytes() if you need output in []bytes
-			return lineNumber, scanner.Text(), scanner.Err()
-		}
-	}
-	return lineNumber, "", nil
-
 }

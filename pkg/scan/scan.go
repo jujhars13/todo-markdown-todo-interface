@@ -33,11 +33,10 @@ func ScanStringForReadmeItems(input string) []int {
 	}
 
 	return output
-
 }
 
 // GetStringAtSpecificLineInFile gets the string content of a specified line in a file
-func GetStringAtSpecificLineInFile(filename string, lineNumber int) (lineNmbr int, todoString string, err error) {
+func GetStringAtSpecificLineInFile(filename string, lineNumber int) (results LineResultsType, err error) {
 	file, err := os.Open(filename)
 	lastLine := 0
 	if err != nil {
@@ -49,9 +48,8 @@ func GetStringAtSpecificLineInFile(filename string, lineNumber int) (lineNmbr in
 		lastLine++
 		if lastLine == lineNumber {
 			// you can return sc.Bytes() if you need output in []bytes
-			return lineNumber, scanner.Text(), scanner.Err()
+			return LineResultsType{lineNumber, scanner.Text()}, scanner.Err()
 		}
 	}
-	return lineNumber, "", nil
-
+	return LineResultsType{lineNumber, ""}, nil
 }

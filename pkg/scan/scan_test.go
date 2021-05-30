@@ -15,8 +15,3 @@ func TestScanStringForReadmeItems(t *testing.T) {
 		}
 	}
 }
-
-// see https://stackoverflow.com/a/67012273/341156
-func TestGetStringAtSpecificLineInFile(t *testing.T) {
-
-}
