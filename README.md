@@ -1,6 +1,6 @@
 # todo - Markdown Todo interface
 
-`todo` is a Go based cli tool and REST api that will scan a directory for Markdown files that contain Markdown format TODO items and serve them up to read and manipulate them via cli and eventually a full CRUD REST interface.
+`todo` is a Go `1.16` based cli tool and REST api that will scan a directory for Markdown files that contain Markdown format TODO items and serve them up to read and manipulate them via cli and eventually a full CRUD REST interface.
 
 ![test workflow](https://github.com/jujhars13/todo-markdown-todo-interface/actions/workflows/test.yml/badge.svg)
 
@@ -41,6 +41,15 @@ todo -d ~/Dropbox/notes
 
 - Following the [project layout](https://github.com/golang-standards/project-layout) Go project layout standard
 - Focus on CLI functionality first, then work on REST interface+
+
+## Debugging
+
+```bash
+# debugging
+go run ./cmd/todo
+
+# running tests
+(cd pkg/scan && go test)
 
 
 ## Licence

@@ -2,7 +2,7 @@ package scan
 
 // various test cases of markdown permutations
 // can be a bit tricky to read because of multiline strings
-var scanStringForReadmeItemsTestCases = []struct {
+var stringForTodoItemsTestCases = []struct {
 	testMarkdownString string
 	expected           []int
 }{

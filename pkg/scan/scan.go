@@ -1,4 +1,4 @@
-// Pacakge which contains funcs to scan strings
+// Package scan contains funcs to scan strings for markdown todos
 package scan
 
 import (
@@ -9,14 +9,15 @@ import (
 	"strings"
 )
 
+// LineResultsType struct
 type LineResultsType = struct {
-	lineNumber int
-	lineString string
+	LineNumber int
+	LineString string
 }
 
-// ScanStringForReadmeItems returns any lines that have an open todo item in
+// StringForTodoItems returns any lines that have an open todo item in
 // or returns 0 if none found
-func ScanStringForReadmeItems(input string) []int {
+func StringForTodoItems(input string) []int {
 
 	output := []int{}
 	// NB not zero index as file line numbers start from 1
@@ -48,7 +49,8 @@ func GetStringAtSpecificLineInFile(filename string, lineNumber int) (results Lin
 		lastLine++
 		if lastLine == lineNumber {
 			// you can return sc.Bytes() if you need output in []bytes
-			return LineResultsType{lineNumber, scanner.Text()}, scanner.Err()
+			var results = LineResultsType{lineNumber, scanner.Text()}
+			return results, scanner.Err()
 		}
 	}
 	return LineResultsType{lineNumber, ""}, nil
