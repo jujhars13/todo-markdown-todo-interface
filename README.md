@@ -21,10 +21,12 @@ todo -d ~/Dropbox/notes
 - [ ] setup makefile
 - [x] setup github actions for ci unit tests
 - [x] publish test badges in readme
-- [ ] setup cli parsing
+- [x] setup cli parsing
 - [ ] mark a todo as done via cli
+- [ ] investiage ncurses interface
 - [ ] Create build and release pipeline
 - [ ] Create docker container
+- [ ] restructure code like [https://github.com/pokemium/Worldwide]()
 
 ### Nice to have
 
